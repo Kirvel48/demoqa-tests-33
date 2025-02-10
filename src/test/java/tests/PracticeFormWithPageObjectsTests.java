@@ -13,7 +13,7 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
 
 
     @Test
-    void fillPracticeForm() {
+    void fillPracticeFormTest() {
         practiceFormPage.openPage()
                 .removeBanners()
                 .setFirstName("Nikita")
@@ -30,23 +30,21 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
         calendarComponent.setDate("1", "August", "2022");
         practiceFormPage.clickSubmit();
 
-        tableResponseComponent.checkResult("""
-                Student Name Nikita Ivanov
-                Student Email ivanov@test.ru
-                Gender Male
-                Mobile 9001234567
-                Date of Birth 01 August,2022
-                Subjects English
-                Hobbies Sports
-                Picture 1.jpg
-                Address Russia,123456,Moscow,ul.Lesnaya,d.5,kv.176
-                State and City Uttar Pradesh Merrut
-                """);
+        tableResponseComponent.checkResult("Nikita Ivanov")
+                .checkResult("ivanov@test.ru")
+                .checkResult("Male")
+                .checkResult("001234567")
+                .checkResult("01 August,2022")
+                .checkResult("English")
+                .checkResult("Sports")
+                .checkResult("1.jpg")
+                .checkResult("Russia,123456,Moscow,ul.Lesnaya,d.5,kv.176")
+                .checkResult("Uttar Pradesh Merrut");
 
     }
 
     @Test
-    void fillPracticeMandatoryForm() {
+    void fillPracticeMandatoryFormTest() {
         practiceFormPage.openPage()
                 .removeBanners()
                 .setFirstName("Nikita")
@@ -54,13 +52,13 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
                 .setGender("Male")
                 .setUserNumber("9001234567")
                 .clickSubmit();
-        tableResponseComponent.checkResult(" Nikita Ivanov")
+        tableResponseComponent.checkResult("Nikita Ivanov")
                 .checkResult("Male")
                 .checkResult("9001234567");
     }
 
     @Test
-    void fillPracticeFormNegative() {
+    void fillPracticeFormNegativeTest() {
         practiceFormPage.openPage()
                 .removeBanners()
                 .setFirstName("Nikita")
